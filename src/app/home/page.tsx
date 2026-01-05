@@ -1,6 +1,6 @@
 'use client'
 
-import { Card } from "../components/Card"
+import { Card } from "../components/ui/Card"
 import { useCharacters } from "@/hooks/useCharacters"
 
 export default function HomePage() {
@@ -10,7 +10,7 @@ export default function HomePage() {
   if (error) return <p>{error}</p>
 
   return (
-    <div>
+    <div className="bg-red-500">
       {characters.map(char => (
         <Card
           key={char.id}
