@@ -1,10 +1,16 @@
 'use client'
 import { getCharacters } from "@/services/api"
-import { Card } from "../components/Card"
+import { Card } from "./components/Card"
 import { useEffect, useState } from "react"
 
+interface Character {
+  name: string
+  status: string
+  image: string
+}
+
 export default function Home() {
-  const [characters, setCharacters] = useState<any[]>([])
+  const [characters, setCharacters] = useState<Character[]>([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -12,7 +18,7 @@ export default function Home() {
     fetch("https://rickandmortyapi.com/api/character")
       .then(res => res.json())
       .then(data => {
-        setCharacters(data)
+        setCharacters(data.results)
         setLoading(false)
       })
   }, [])
@@ -26,7 +32,7 @@ export default function Home() {
           <h3>{char.name}</h3>
           <Card
             title={char.name}
-            description={char.description}
+            description={char.status}
             imageUrl={char.image}
             onClick={() => getCharacters()}
           />
